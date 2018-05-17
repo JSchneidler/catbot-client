@@ -1,9 +1,9 @@
 import React from 'react';
+import { AppBar, Toolbar, Typography } from 'material-ui';
 
-import './style.scss';
-
-export default props => {
-  return <div id="header">
-    CatBot
-  </div>;
-};
+export default props => 
+<AppBar position="static">
+  <Toolbar>
+    <Typography variant="title" color="inherit">CatBot</Typography>
+  </Toolbar>
+</AppBar>
