@@ -5,7 +5,7 @@ socket.binaryType = 'arraybuffer';
 
 socket.onopen = event => console.log('WebSocket open:', event);
 
-class Bot extends EventEmitter {
+export default new class Bot extends EventEmitter {
   constructor() {
     super();
 
@@ -13,6 +13,7 @@ class Bot extends EventEmitter {
     this.socket.onmessage = event => this.handleSocketMessage(event);
   }
 
+  // Can we just call new Bot().on()?
   handleSocketMessage(event) {
     console.log(event);
     //let response = JSON.parse(event.data);
@@ -22,14 +23,17 @@ class Bot extends EventEmitter {
   }
 
   update(properties) {
-    const buffer = new ArrayBuffer(2);
+    const buffer = new ArrayBuffer(3);
     const view = new DataView(buffer);
 
     view.setInt8(0, properties.speed);
-    view.setInt8(1, properties.direction);
+    if (properties.direction) {
+      view.setInt8(1, properties.direction[0]);
+      view.setInt8(2, properties.direction[1]);
+    }
 
-    this.socket.send(buffer);
+    console.log(buffer);
+
+    //this.socket.send(buffer);
   }
 }
-
-export default new Bot;

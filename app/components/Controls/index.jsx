@@ -27,6 +27,8 @@ const KEYS = {
 
 const keysDown = [];
 
+const DEFAULT_SPEED = 50;
+
 export default class Controls extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +37,7 @@ export default class Controls extends Component {
 
     this.state = {
       focused: false,
-      speed: 50,
+      speed: DEFAULT_SPEED,
       direction: 0,
       activeControls: [],
     };
@@ -55,6 +57,10 @@ export default class Controls extends Component {
     activeControls.splice(activeControls.indexOf(control), 1);
 
     this.setState({ activeControls }, this.updateBot);
+  }
+
+  setSpeed(speed) {
+    this.setState({ speed }, this.updateBot);
   }
 
   handleKeyDown(keyCode) {
@@ -93,9 +99,28 @@ export default class Controls extends Component {
   }
 
   updateBot() {
-    console.log(`Bot Parameters: Speed: ${this.state.speed} Controls: ${this.state.activeControls}`);
-    // TODO: Use activeControls to determine new speed and direction.
-    // TODO: Send this speed and direction to the robot.
+    const activeControls = uniq(this.state.activeControls);
+    let velocityX = 0, velocityY = 0;
+
+    activeControls.forEach(control => {
+      switch(control) {
+        case CONTROLS.LEFT:
+          return velocityX -= 1;
+        case CONTROLS.RIGHT:
+          return velocityX += 1;
+
+        case CONTROLS.FORWARD:
+          return velocityY += 1;
+        case CONTROLS.REVERSE:
+          return velocityY -= 1;
+      }
+    });
+
+    console.log([velocityX, velocityY], this.state.speed);
+    Bot.update({
+      speed: this.state.speed,
+      direction: [velocityX, velocityY],
+    });
   }
 
   render() {
@@ -129,9 +154,10 @@ export default class Controls extends Component {
             <Slider
               orientation="vertical"
               value={this.state.speed}
-              onChange={value => this.setState({ speed: value })}
+              onChange={value => this.setSpeed(value)}
               onChangeComplete={() => this.updateBot()}
             />
+            <h4 onClick={() => this.setSpeed(DEFAULT_SPEED)}>{ this.state.speed }</h4>
           </Grid>
         </Grid>
       </div>
