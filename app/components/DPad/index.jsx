@@ -79,7 +79,6 @@ export default class DPad extends Component {
     return (
       <div ref={this.dpad_ref}
         style={{ width: '100%', height: this.state.height }}
-        onMouseDown={e => e.preventDefault()}
       >
         <div style={FLEX_CENTER}>{this.generateDirectional('up')}</div>
         <div style={FLEX_SPACE_BETWEEN}>

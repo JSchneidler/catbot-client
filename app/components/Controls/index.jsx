@@ -11,7 +11,7 @@ import CONTROLS from './controls';
 
 import 'react-rangeslider/lib/index.css';
 
-// TODO: Fix issue with focus/blur
+// TODO: Fix issue with focus/blur. Repro: https://codesandbox.io/s/7j8yr22n4j
 
 const KEYS = {
   37: CONTROLS.LEFT, // Left arrow
@@ -108,6 +108,7 @@ export default class Controls extends Component {
 
     return (
       <div
+        tabIndex={0}
         onKeyDown={event => this.handleKeyDown(event.keyCode)}
         onKeyUp={event => this.handleKeyUp(event.keyCode)}
         onFocus={event => { console.log('focused'); this.setState({ focused: true }); }}
@@ -117,11 +118,10 @@ export default class Controls extends Component {
         <Grid
           container
           spacing={0}
-          tabIndex={0}
           style={style}
         >
           <Grid item xs={12} style={{ textAlign: 'center' }}>
-            {this.state.focused ? <ReleaseControl onClick={() => this.controlRef.current.blur()} /> : <TakeControl onClick={() => this.controlRef.current.focus()} />}
+            {this.state.focused ? <ReleaseControl onClick={() => { console.log('controlRef', this.controlRef); this.controlRef.current.blur(); }} /> : <TakeControl onClick={() => this.controlRef.current.focus()} />}
           </Grid>
           <Grid item xs={9}>
             <DPad
