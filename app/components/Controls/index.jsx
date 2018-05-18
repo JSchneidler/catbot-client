@@ -11,8 +11,6 @@ import CONTROLS from './controls';
 
 import 'react-rangeslider/lib/index.css';
 
-// TODO: Fix issue with focus/blur. Repro: https://codesandbox.io/s/7j8yr22n4j
-
 const KEYS = {
   37: CONTROLS.LEFT, // Left arrow
   65: CONTROLS.LEFT, // a
