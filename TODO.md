@@ -10,6 +10,7 @@
 * [ ] Camera options
 * [ ] Robot control
 * [ ] Authentication
+* [ ] Optimize rendering
 * [ ] Socket reconnect
 * [ ] Implement React Grid Layout?
 * [ ] Implement joystick/fine control
