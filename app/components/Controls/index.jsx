@@ -68,7 +68,6 @@ export default class Controls extends Component {
   }
 
   handleKeyUp(keyCode) {
-    console.log('keyUp: ' + keyCode);
     pull(keysDown, keyCode);
 
     if (KEYS[keyCode]) this.removeControl(KEYS[keyCode]);
@@ -103,26 +102,25 @@ export default class Controls extends Component {
 
   render() {
     const style = {
-      border: `1px solid ${this.state.focused ? 'green' : 'black'}`
-    }
+      border: `5px solid ${this.state.focused ? 'green' : '#999'}`,
+      textAlign: 'center',
+    };
 
-    return (
+    return <div style={style}>
+      {this.state.focused ?
+        <ReleaseControl onClick={() => this.controlRef.current.blur()} /> :
+        <TakeControl onClick={() => this.controlRef.current.focus()} />
+      }
       <div
         tabIndex={0}
+        ref={this.controlRef}
+        style={{ outline: 'none' }}
         onKeyDown={event => this.handleKeyDown(event.keyCode)}
         onKeyUp={event => this.handleKeyUp(event.keyCode)}
-        onFocus={event => { console.log('focused'); this.setState({ focused: true }); }}
-        onBlur={event => { console.log('blurred'); this.setState({ focused: false }); }}
-        ref={this.controlRef}
+        onFocus={event => this.setState({ focused: true })}
+        onBlur={event => this.setState({ focused: false })}
       >
-        <Grid
-          container
-          spacing={0}
-          style={style}
-        >
-          <Grid item xs={12} style={{ textAlign: 'center' }}>
-            {this.state.focused ? <ReleaseControl onClick={() => { console.log('controlRef', this.controlRef); this.controlRef.current.blur(); }} /> : <TakeControl onClick={() => this.controlRef.current.focus()} />}
-          </Grid>
+        <Grid container spacing={0}>
           <Grid item xs={9}>
             <DPad
               state={convertControlsToDPadState(this.state.activeControls)}
@@ -139,7 +137,7 @@ export default class Controls extends Component {
           </Grid>
         </Grid>
       </div>
-    );
+    </div>;
   }
 };
 
