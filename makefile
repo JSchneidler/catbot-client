@@ -22,7 +22,7 @@ webpack.watch:
 
 # Common build tasks
 build.common:
-	cp -R public/* dist/
+	cp -R app/index.html dist/
 
 # Dev build
 build.dev:
