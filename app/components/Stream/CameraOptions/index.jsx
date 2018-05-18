@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Select, MenuItem, TextField } from 'material-ui';
+import { Select, MenuItem, TextField } from '@material-ui/core';
 
 import Camera from 'services/api/camera';
 
