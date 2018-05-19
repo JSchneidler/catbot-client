@@ -27,7 +27,7 @@ const KEYS = {
 
 const keysDown = [];
 
-const DEFAULT_SPEED = 50;
+const DEFAULT_SPEED = 100;
 
 export default class Controls extends Component {
   constructor(props) {
