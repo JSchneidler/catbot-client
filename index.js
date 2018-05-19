@@ -4,7 +4,7 @@ const express = require('express');
 const http = require('http');
 const path = require('path');
 const api = require('./api');
-const socketServer = require('./SocketServer');
+const socketServer = require('./socketServer');
 
 const app = express();
 const server = http.createServer(app);

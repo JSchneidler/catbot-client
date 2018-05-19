@@ -116,11 +116,10 @@ export default class Controls extends Component {
       }
     });
 
-    console.log([velocityX, velocityY], this.state.speed);
-    Bot.update({
-      speed: this.state.speed,
-      direction: [velocityX, velocityY],
-    });
+    const speed = (velocityX === 0 && velocityY === 0) ? 0 : this.state.speed;
+    const direction = Math.atan2(velocityX, velocityY)*(180/Math.PI);
+
+    Bot.update({ speed, direction });
   }
 
   render() {
@@ -154,7 +153,7 @@ export default class Controls extends Component {
             <Slider
               orientation="vertical"
               value={this.state.speed}
-              onChange={value => this.setSpeed(value)}
+              onChange={value => this.setState({ speed: value })}
               onChangeComplete={() => this.updateBot()}
             />
             <h4 onClick={() => this.setSpeed(DEFAULT_SPEED)}>{ this.state.speed }</h4>

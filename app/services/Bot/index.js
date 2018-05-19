@@ -23,17 +23,12 @@ export default new class Bot extends EventEmitter {
   }
 
   update(properties) {
-    const buffer = new ArrayBuffer(3);
+    const buffer = new ArrayBuffer(4);
     const view = new DataView(buffer);
 
-    view.setInt8(0, properties.speed);
-    if (properties.direction) {
-      view.setInt8(1, properties.direction[0]);
-      view.setInt8(2, properties.direction[1]);
-    }
+    view.setUint16(0, properties.speed);
+    view.setInt16(2, properties.direction);
 
-    console.log(buffer);
-
-    //this.socket.send(buffer);
+    this.socket.send(buffer);
   }
 }

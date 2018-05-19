@@ -13,10 +13,8 @@ function attach(httpServer) {
 
 function registerListeners() {
   socketServer.on('connection', ws => {
-    console.log('New connection');
-
     ws.on('message', message => {
-      if (Buffer.isBuffer(message) && message.length === 2) botController.sendCommand(message);
+      if (Buffer.isBuffer(message) && message.length === 4) botController.sendCommand(message);
     });
   });
 }

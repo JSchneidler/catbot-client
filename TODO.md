@@ -4,6 +4,7 @@
 * [ ] Camera options
 * [ ] Robot control
 * [ ] Authentication
+* [ ] Convert bot communication to UDP
 * [X] .env
 
 ## Client
