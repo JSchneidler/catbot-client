@@ -30,7 +30,7 @@ const PROPERTIES = {
   // TODO: zoom: { },
 }
 
-export default class CameraOptions extends Component {
+class CameraOptions extends Component {
   constructor(props) {
     super(props);
 
@@ -78,3 +78,5 @@ export default class CameraOptions extends Component {
     return this.getOptions();
   }
 }
+
+export default CameraOptions;

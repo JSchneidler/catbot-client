@@ -29,7 +29,7 @@ const keysDown = [];
 
 const DEFAULT_SPEED = 100;
 
-export default class Controls extends Component {
+class Controls extends Component {
   constructor(props) {
     super(props);
 
@@ -117,6 +117,7 @@ export default class Controls extends Component {
     });
 
     const speed = (velocityX === 0 && velocityY === 0) ? 0 : this.state.speed;
+    // Convert [x, y] vector to angle, preserving quadrant.
     const direction = Math.atan2(velocityX, velocityY)*(180/Math.PI);
 
     Bot.update({ speed, direction });
@@ -146,7 +147,8 @@ export default class Controls extends Component {
           <Grid item xs={9}>
             <DPad
               state={convertControlsToDPadState(this.state.activeControls)}
-              onClick={(direction, mouseDown) => this.handleDPadClick(direction, mouseDown)}
+              onMouseDown={direction => this.handleDPadClick(direction, true)}
+              onMouseUp={direction => this.handleDPadClick(direction, false)}
             />
           </Grid>
           <Grid item xs={3}>
@@ -162,7 +164,7 @@ export default class Controls extends Component {
       </div>
     </div>;
   }
-};
+}
 
 function convertControlsToDPadState(activeControls) {
   return uniq(activeControls).map(control => {
@@ -178,3 +180,5 @@ function convertControlsToDPadState(activeControls) {
     }
   });
 }
+
+export default Controls;

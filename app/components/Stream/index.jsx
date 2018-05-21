@@ -5,8 +5,10 @@ import Camera from 'services/api/camera';
 
 import './style.scss';
 
-export default props =>
+const Stream = props =>
 <div>
   <CameraOptions />
   <img id="stream" src={Camera.streamUrl} />
 </div>;
+
+export default Stream;
