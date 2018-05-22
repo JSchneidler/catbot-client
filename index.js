@@ -11,7 +11,7 @@ const server = http.createServer(app);
 
 socketServer.attach(server);
 
-const PORT = process.env.PORT || 8888;
+const PORT = process.env.PORT;
 
 app.use(express.static(path.join(__dirname, 'dist')));
 

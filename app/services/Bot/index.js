@@ -1,16 +1,26 @@
 import EventEmitter from 'events';
 
-const socket = new WebSocket('ws://localhost:8888');
+const socket = new WebSocket(`ws://${location.host}`);
 socket.binaryType = 'arraybuffer';
 
-socket.onopen = event => console.log('WebSocket open:', event);
+socket.onerror = event => console.error('WebSocket error:', event);
 
 export default new class Bot extends EventEmitter {
   constructor() {
     super();
 
-    this.socket = socket;
-    this.socket.onmessage = event => this.handleSocketMessage(event);
+    socket.onopen = event => { console.log(socket.readyState); this.emit('status', socket.readyState); };
+    socket.onerror = event => this.emit('status', socket.readyState);
+    socket.onclose = event => this.emit('status', socket.readyState);
+    socket.onmessage = event => this.handleSocketMessage(event);
+  }
+
+  isConnecting() {
+    return socket.readyState === 0;
+  }
+
+  isConnected() {
+    return socket.readyState === 1;
   }
 
   // Can we just call new Bot().on()?
@@ -23,12 +33,15 @@ export default new class Bot extends EventEmitter {
   }
 
   update(properties) {
+    if (!this.isConnected()) return false;
+
     const buffer = new ArrayBuffer(4);
     const view = new DataView(buffer);
 
     view.setUint16(0, properties.speed);
     view.setInt16(2, properties.direction);
 
-    this.socket.send(buffer);
+    socket.send(buffer);
+    return true;
   }
 }
