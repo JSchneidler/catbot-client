@@ -32,7 +32,7 @@ const DPad = props => {
       arrowFillColor={arrowFillColor}
       circleFillColor={circleFillColor}
       circleOutlineColor={circleOutlineColor}
-      style={{ width: '33.3%', verticalAlign: 'top', transform: `rotate(${rotation}deg)` }}
+      style={{ height: '100%', width: '33.3%', verticalAlign: 'top', transform: `rotate(${rotation}deg)` }}
     />;
   }
 
