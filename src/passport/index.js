@@ -25,7 +25,7 @@ passport.use(new JWTStrategy({
   jwtFromRequest: passportJWT.ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: process.env.JWT_KEY,
 }, (payload, done) => {
-  User.findOne({ where: { id: payload.id }})
+  User.findOne({ where: { id: payload.userId }})
     .then(user => {
       if (!user) return done(null, false, { message: 'User does not exist' });
       done(null, user);

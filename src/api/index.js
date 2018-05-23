@@ -7,7 +7,7 @@ const User = require('db').User;
 
 function generateToken(userId) {
   return new Promise((resolve, reject) => {
-    jwt.sign({ id: userId }, process.env.JWT_KEY, (err, token) => {
+    jwt.sign({ userId, }, process.env.JWT_KEY, (err, token) => {
       if (err) return reject(err);
       resolve(token);
     });
