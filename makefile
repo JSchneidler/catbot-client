@@ -28,7 +28,8 @@ webpack.watch:
 
 # Common build tasks
 build.common:
-	cp -R app/index.html dist/
+	cp app/index.html dist/
+	@make migrate
 
 # Dev build
 build.dev:
