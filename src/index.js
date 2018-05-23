@@ -28,7 +28,6 @@ app.use((req, res, next) => {
 app.use('/api', api);
 
 app.all('*', (req, res) => {
-  console.log('Index route');
   res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
