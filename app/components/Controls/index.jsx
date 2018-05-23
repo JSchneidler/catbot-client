@@ -6,7 +6,7 @@ import { clone, pull, uniq } from 'lodash';
 import DPad from 'components/DPad';
 import TakeControl from './TakeControl';
 import ReleaseControl from './ReleaseControl';
-import Bot from 'services/Bot';
+import { Bot } from 'services';
 import CONTROLS from './controls';
 
 import 'react-rangeslider/lib/index.css';

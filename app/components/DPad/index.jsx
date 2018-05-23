@@ -2,8 +2,6 @@ import React from 'react';
 
 import Directional from './Directional';
 
-// TODO: Fix flexbox problem
-
 const DPad = props => {
   function generateDirectional(direction) {
     const active = props.state.indexOf(direction) !== -1;

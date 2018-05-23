@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Select, MenuItem, TextField } from '@material-ui/core';
 
-import Camera from 'services/api/camera';
+import { Camera } from 'services';
 
 const AWB_MODES = ['off', 'auto', 'sunlight', 'cloudy', 'shade', 'tungsten', 'flourescent', 'incandescent', 'flash', 'horizon'];
 const EXPOSURE_MODES = ['off', 'auto', 'night', 'nightpreview', 'backlight', 'spotlight', 'sports', 'snow', 'beach', 'verylong', 'fixedfps', 'antishake', 'fireworks'];

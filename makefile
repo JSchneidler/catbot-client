@@ -2,6 +2,12 @@
 all:
 	@make serve.dev
 
+
+
+
+
+##### BUILD TASKS #####
+
 # Create dist folder
 dist-folder:
 	rm -rf ./dist
@@ -47,3 +53,12 @@ serve.dev:
 serve.prod:
 	@make build.prod
 	npm start
+
+
+
+
+
+##### DB TASKS #####
+
+migrate:
+	sequelize db:migrate

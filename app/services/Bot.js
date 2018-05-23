@@ -5,7 +5,7 @@ socket.binaryType = 'arraybuffer';
 
 socket.onerror = event => console.error('WebSocket error:', event);
 
-export default new class Bot extends EventEmitter {
+class Bot extends EventEmitter {
   constructor() {
     super();
 
@@ -23,7 +23,7 @@ export default new class Bot extends EventEmitter {
     return socket.readyState === 1;
   }
 
-  // Can we just call new Bot().on()?
+  // Can we just call Bot().on()?
   handleSocketMessage(event) {
     console.log(event);
     //let response = JSON.parse(event.data);
@@ -45,3 +45,5 @@ export default new class Bot extends EventEmitter {
     return true;
   }
 }
+
+export default new Bot;

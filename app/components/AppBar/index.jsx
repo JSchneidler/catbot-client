@@ -1,26 +1,40 @@
 import React, { Component } from 'react';
-import { AppBar as MatAppBar, Toolbar, Typography } from '@material-ui/core';
+import { AppBar as MatAppBar, Button, Toolbar, Typography } from '@material-ui/core';
 
-import Bot from 'services/Bot';
+import LoginModal from 'components/LoginModal';
+
+import { Bot } from 'services';
 
 class AppBar extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      botStatus: 0,
+      loginModalOpen: false,
     };
+  }
 
-    Bot.on('status', status => this.setState({ botStatus: status }));
+  openLoginModal() {
+    this.setState({ loginModalOpen: true });
+  }
+
+  closeLoginModal() {
+    this.setState({ loginModalOpen: false });
   }
 
   render() {
-    return <MatAppBar position="static">
-      <Toolbar>
+    return <div>
+      <LoginModal
+        isOpen={this.state.loginModalOpen}
+        onRequestClose={() => this.closeLoginModal()}
+      />
+      <MatAppBar position="static" style={{ background: '#333' }}>
+        <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Typography variant="title" color="inherit">CatBot</Typography>
-        {getBotStatus(this.state.botStatus)}
+          <Button color="inherit" onClick={() => this.openLoginModal()}>Login</Button>
       </Toolbar>
-    </MatAppBar>;
+      </MatAppBar>
+    </div>;
   }
 }
 

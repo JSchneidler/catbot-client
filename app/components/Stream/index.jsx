@@ -1,7 +1,7 @@
 import React from 'react';
 
 import CameraOptions from './CameraOptions';
-import Camera from 'services/api/camera';
+import { Camera } from 'services';
 
 import './style.scss';
 
