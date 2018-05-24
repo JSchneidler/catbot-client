@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Select, MenuItem, TextField } from '@material-ui/core';
 
-import { Camera } from 'services';
+import { camera } from 'services';
 
 const AWB_MODES = ['off', 'auto', 'sunlight', 'cloudy', 'shade', 'tungsten', 'flourescent', 'incandescent', 'flash', 'horizon'];
 const EXPOSURE_MODES = ['off', 'auto', 'night', 'nightpreview', 'backlight', 'spotlight', 'sports', 'snow', 'beach', 'verylong', 'fixedfps', 'antishake', 'fireworks'];
@@ -36,7 +36,7 @@ class CameraOptions extends Component {
 
     this.state = {};
 
-    Camera.getState().then(console.log);
+    camera.getState().then(console.log);
   }
 
   getOptions() {

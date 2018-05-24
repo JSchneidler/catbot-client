@@ -62,4 +62,4 @@ serve.prod:
 ##### DB TASKS #####
 
 migrate:
-	sequelize db:migrate
+	npm run migrate

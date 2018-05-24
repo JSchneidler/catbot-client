@@ -6,7 +6,7 @@ import { clone, pull, uniq } from 'lodash';
 import DPad from 'components/DPad';
 import TakeControl from './TakeControl';
 import ReleaseControl from './ReleaseControl';
-import { Bot } from 'services';
+import { bot } from 'services';
 import CONTROLS from './controls';
 
 import 'react-rangeslider/lib/index.css';
@@ -120,7 +120,7 @@ class Controls extends Component {
     // Convert [x, y] vector to angle, preserving quadrant.
     const direction = Math.atan2(velocityX, velocityY)*(180/Math.PI);
 
-    Bot.update({ speed, direction });
+    bot.update({ speed, direction });
   }
 
   render() {

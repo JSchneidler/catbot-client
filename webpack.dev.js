@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common');
@@ -12,7 +14,7 @@ module.exports = merge(common, {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     overlay: true,
-    proxy: {'/api': `http://localhost:${process.env.API_PORT || 8888}`}
+    proxy: {'/api': `http://localhost:${process.env.PORT}`}
     //hot: true,
   },
   plugins: [

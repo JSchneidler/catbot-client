@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { AppBar as MatAppBar, Button, Toolbar, Typography } from '@material-ui/core';
+import { AppBar as MatAppBar, Button, IconButton, Toolbar, Typography } from '@material-ui/core';
+import { AccountCircle } from '@material-ui/icons';
 
 import LoginModal from 'components/LoginModal';
-
-import { Bot } from 'services';
+import api from 'services/api';
 
 class AppBar extends Component {
   constructor(props) {
@@ -11,7 +11,10 @@ class AppBar extends Component {
 
     this.state = {
       loginModalOpen: false,
+      loggedIn: api.isLoggedIn(),
     };
+
+    api.on('status', loggedIn => this.setState({ loggedIn }));
   }
 
   openLoginModal() {
@@ -27,11 +30,18 @@ class AppBar extends Component {
       <LoginModal
         isOpen={this.state.loginModalOpen}
         onRequestClose={() => this.closeLoginModal()}
+        closeModal={() => this.closeLoginModal()}
       />
       <MatAppBar position="static" style={{ background: '#333' }}>
         <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Typography variant="title" color="inherit">CatBot</Typography>
-          <Button color="inherit" onClick={() => this.openLoginModal()}>Login</Button>
+        {!this.state.loggedIn ?
+          <Button color="inherit" onClick={() => this.openLoginModal()}>Login</Button> :
+          <span>
+            <Button color="inherit" onClick={() => api.logout()}>Sign Out</Button>
+            <IconButton><AccountCircle style={{ color: 'white' }} /></IconButton>
+          </span>
+        }
       </Toolbar>
       </MatAppBar>
     </div>;

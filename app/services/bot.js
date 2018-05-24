@@ -1,6 +1,6 @@
 import EventEmitter from 'events';
 
-const socket = new WebSocket(`ws://${location.host}`);
+const socket = new WebSocket('ws://' + location.host);
 socket.binaryType = 'arraybuffer';
 
 socket.onerror = event => console.error('WebSocket error:', event);
