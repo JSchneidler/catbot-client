@@ -132,7 +132,7 @@ class Controls extends Component {
         position: 'relative',
       },
       controls: {
-        boxSizing: 'border-box',
+        //boxSizing: 'border-box',
         outline: 'none',
         padding: '10px'
       },
@@ -150,11 +150,13 @@ class Controls extends Component {
       }
     };
 
+    /*
     if (this.state.focused) {
       style.controls.borderColor = '#4CAF50';
       style.controls.borderStyle = 'solid';
       style.controls.borderWidth = '0px 0px 2px 2px';
     }
+    */
 
     return <div style={style.controlsContainer}>
       {!this.state.focused &&
