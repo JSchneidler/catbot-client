@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import Slider from 'react-rangeslider';
 import { clone, pull, uniq } from 'lodash';
 
+import Overlay from './Overlay';
 import DPad from 'components/DPad';
 import TakeControl from './TakeControl';
 import ReleaseControl from './ReleaseControl';
@@ -28,6 +29,7 @@ const KEYS = {
 const keysDown = [];
 
 const DEFAULT_SPEED = 100;
+
 
 class Controls extends Component {
   constructor(props) {
@@ -125,25 +127,52 @@ class Controls extends Component {
 
   render() {
     const style = {
-      border: `5px solid ${this.state.focused ? 'green' : '#999'}`,
-      textAlign: 'center',
+      controlsContainer: {
+        textAlign: 'center',
+        position: 'relative',
+      },
+      controls: {
+        boxSizing: 'border-box',
+        outline: 'none',
+        padding: '10px'
+      },
+      overlay: {
+        display: 'flex',
+        justifyContent: 'center',
+        height: '100%',
+      },
+      overlayContent: {
+        alignSelf: 'center',
+        color: 'white',
+      },
+      releaseControl: {
+        marginBottom: '10px',
+      }
     };
 
-    return <div style={style}>
-      {this.state.focused ?
-        <ReleaseControl onClick={() => this.controlRef.current.blur()} /> :
-        <TakeControl onClick={() => this.controlRef.current.focus()} />
+    if (this.state.focused) {
+      style.controls.borderColor = '#4CAF50';
+      style.controls.borderStyle = 'solid';
+      style.controls.borderWidth = '0px 0px 2px 2px';
+    }
+
+    return <div style={style.controlsContainer}>
+      {!this.state.focused &&
+        <Overlay onClick={() => this.controlRef.current.focus()}>
+          <div style={style.overlay}><Typography variant="headline" style={style.overlayContent}>Click inside box to take control</Typography></div>
+        </Overlay>
       }
       <div
         tabIndex={0}
         ref={this.controlRef}
-        style={{ outline: 'none' }}
+        style={style.controls}
         onKeyDown={event => this.handleKeyDown(event.keyCode)}
         onKeyUp={event => this.handleKeyUp(event.keyCode)}
         onFocus={event => this.setState({ focused: true })}
         onBlur={event => this.setState({ focused: false })}
       >
         <Grid container spacing={0}>
+          <Grid item xs={12} style={style.releaseControl}><ReleaseControl onClick={() => this.controlRef.current.blur()} disabled={!this.state.focused} /></Grid>
           <Grid item xs={9}>
             <DPad
               state={convertControlsToDPadState(this.state.activeControls)}

@@ -10,7 +10,7 @@ const style = {
 
 const Stream = props =>
 <div>
-  <CameraOptions />
+  {/*<CameraOptions />*/}
   <img style={style} src={camera.streamUrl} />
 </div>;
 

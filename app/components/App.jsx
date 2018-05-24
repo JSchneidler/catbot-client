@@ -7,9 +7,7 @@ class App extends Component {
   render() {
     return <div>
       <AppBar />
-      <div style={{ margin: '0 10px', marginTop: '10px' }}>
-        <CatBot />
-      </div>
+      <CatBot />
     </div>;
   }
 };

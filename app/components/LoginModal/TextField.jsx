@@ -4,7 +4,7 @@ import { Input, withStyles } from '@material-ui/core';
 const styles = {
   underline: {
     '&:after': {
-      borderBottomColor: 'green',
+      borderBottomColor: '#4CAF50',
     },
   },
   input: {

@@ -2,17 +2,19 @@
 
 ## Server
 * [ ] Camera options
-* [ ] Robot control
-* [ ] Authentication
 * [ ] Convert bot communication to UDP
+* [X] Robot control
+* [X] Authentication
 * [X] .env
 
 ## Client
+* [ ] Add containers around components
+* [ ] Move to Redux
 * [ ] Camera options
-* [ ] Robot control
-* [ ] Authentication
 * [ ] Optimize rendering
 * [ ] Socket reconnect
 * [ ] Implement React Grid Layout?
 * [ ] Implement joystick/fine control
 * [ ] Gamepad control? https://github.com/SBRK/react-gamepad
+* [X] Robot control
+* [X] Authentication
