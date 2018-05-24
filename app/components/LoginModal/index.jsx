@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dialog, Button } from '@material-ui/core';
+import { Dialog, Button, Typography } from '@material-ui/core';
 
 import TextField from './TextField';
 import api from 'services/api';
@@ -12,7 +12,6 @@ const style = {
   },
   header: {
     color: 'white',
-    margin: 0,
     textAlign: 'center',
   },
   modal: {
@@ -50,9 +49,9 @@ class LoginModal extends Component {
       onClose={() => closeModal()}
     >
       <div style={style.modal}>
-        <h2 style={style.header}>Log In</h2>
-        <TextField onChange={event => this.setState({ username: event.target.value })} value={this.state.username} />
-        <TextField onChange={event => this.setState({ password: event.target.value })} value={this.state.password} />
+        <Typography style={style.header} variant="headline">Log In</Typography>
+        <TextField onChange={event => this.setState({ username: event.target.value })} value={this.state.username} placeholder="Username" />
+        <TextField onChange={event => this.setState({ password: event.target.value })} value={this.state.password} placeholder="Password" type="password" />
         <Button style={style.button} onClick={() => this.login()}>Sign In</Button>
       </div>
     </Dialog>;

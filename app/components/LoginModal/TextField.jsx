@@ -7,8 +7,11 @@ const styles = {
       borderBottomColor: 'green',
     },
   },
+  input: {
+    color: 'white',
+  },
 };
 
-const TextField = props => <Input {...props} classes={{ underline: props.classes.underline }} />
+const TextField = props => <Input {...props} classes={props.classes} />;
 
 export default withStyles(styles)(TextField);

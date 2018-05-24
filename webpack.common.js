@@ -40,14 +40,15 @@ module.exports = {
         use: 'svg-react-loader'
       },
       {
-        test: /\.(gif|png|jpe?g|webp)$/i,
-        use: 'file-loader?hash=sha512&digest=hex&name=./images/[hash].[ext]'
+        test: /\.woff2?$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 50000,
+          },
+        },
       },
-      {
-        test: /\.(wav|mp3)$/i,
-        use: 'file-loader?hash=sha512&digest=hex&name=./sounds/[hash].[ext]'
-      }
-    ]
+    ],
   },
   resolve: {
     extensions: [".jsx", ".js"],

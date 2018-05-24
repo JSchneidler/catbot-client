@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import App from 'components/App';
 
-// Stylesheets
+import 'typeface-roboto';
 import 'normalize.css';
 
 ReactDOM.render(

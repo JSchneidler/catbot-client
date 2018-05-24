@@ -41,6 +41,7 @@
     "react-rangeslider": "^2.2.0",
     "sequelize": "^4.37.8",
     "sqlite3": "^4.0.0",
+    "typeface-roboto": "0.0.54",
     "ws": "^5.1.1"
   },
   "devDependencies": {
