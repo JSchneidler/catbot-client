@@ -37,10 +37,7 @@ module.exports = class BotController {
 
   write(data) {
     return this.connect()
-      .then(() => new Promise(resolve => this.client.write(data, () => {
-        console.log('Wrote:', data);
-        resolve();
-      })));
+      .then(() => new Promise(resolve => this.client.write(data, () => resolve())));
   }
 
   sendCommand(command) {

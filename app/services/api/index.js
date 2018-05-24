@@ -25,9 +25,10 @@ class Api extends EventEmitter {
 
   _getRequestConfig() {
     const config = {};
+    const token = getJwtToken();
 
-    if (this.token) config.headers = {
-      Authorization: 'Bearer ' + getJwtToken(),
+    if (token) config.headers = {
+      Authorization: 'Bearer ' + token,
     }
 
     return config;
@@ -35,26 +36,26 @@ class Api extends EventEmitter {
 
   isLoggedIn() { return getJwtToken() != null; }
 
-  get(url) {
-    return axios.get(path.join(API_URL, url), this._getRequestConfig());
+  _get(url) {
+    return axios.get(path.join(API_URL, url), this._getRequestConfig()).then(response => response.data);
   }
 
-  post(url, data) {
-    return axios.post(path.join(API_URL, url), data, this._getRequestConfig());
+  _post(url, data) {
+    return axios.post(path.join(API_URL, url), data, this._getRequestConfig()).then(response => response.data);
   }
 
   login(username, password) {
     if (this.isLoggedIn()) return;
 
-    return this.post('/login', { username, password })
-      .then(token => setJwtToken(token))
+    return this._post('/login', { username, password })
+      .then(response => setJwtToken(response.token))
       .then(() => this.emit('status', true));
   }
 
   logout() {
     if (!this.isLoggedIn()) return;
 
-    return this.get('/logout')
+    return this._get('/logout')
       .then(() => clearJwtToken())
       .then(() => this.emit('status', false));
   }

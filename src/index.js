@@ -19,8 +19,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use((req, res, next) => {
-  res.success = data => res.status(200).json({ data });
-  res.fail = error => res.status(400).json({ error });
+  res.success = data => res.status(200).json(data);
+  res.fail = error => res.status(400).json(error);
 
   next();
 });

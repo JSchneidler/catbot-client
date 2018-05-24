@@ -2,7 +2,6 @@ const router = require('express').Router();
 const passport = require('passport');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const checkAuth = require('./middleware/checkAuth');
 const User = require('db').User;
 
 function generateToken(userId) {
@@ -19,7 +18,7 @@ router.all('/', (req, res) => {
 });
 
 router.post('/login', passport.authenticate('local', { session: false }), (req, res) => {
-  generateToken(req.user.id).then(token => res.success(token));
+  generateToken(req.user.id).then(token => res.success({ token }));
 });
 
 router.post('/register', (req, res) => {
@@ -35,15 +34,12 @@ router.post('/register', (req, res) => {
       password: passwordHash,
     }))
     .then(user => generateToken(user.id))
-    .then(token => res.success(token))
-    .catch(error => {
-      console.error(error);
-      res.fail(error);
-    });
+    .then(token => res.success({ token }))
+    .catch(error => res.fail({ error }));
 });
 
 router.get('/user', passport.authenticate('jwt', { session: false }), (req, res) => {
-  res.success(req.user);
+  res.success({ user: req.user });
 });
 
 router.get('/logout', (req, res) => {

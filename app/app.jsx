@@ -5,7 +5,6 @@ import App from 'components/App';
 
 // Stylesheets
 import 'normalize.css';
-import './styles/app.scss';
 
 ReactDOM.render(
   <App />,

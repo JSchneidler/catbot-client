@@ -38,7 +38,6 @@
     "passport-local": "^1.0.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "react-modal": "^3.4.4",
     "react-rangeslider": "^2.2.0",
     "sequelize": "^4.37.8",
     "sqlite3": "^4.0.0",

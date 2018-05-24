@@ -22,8 +22,6 @@ webpack.build.prod:
 # Start client dev server
 webpack.watch:
 	-npm i
-	@make dist-folder
-	@make build.common
 	npm run webpack.devServer
 
 # Common build tasks

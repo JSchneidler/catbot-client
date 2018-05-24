@@ -28,15 +28,14 @@ class AppBar extends Component {
   render() {
     return <div>
       <LoginModal
-        isOpen={this.state.loginModalOpen}
-        onRequestClose={() => this.closeLoginModal()}
+        open={this.state.loginModalOpen}
         closeModal={() => this.closeLoginModal()}
       />
       <MatAppBar position="static" style={{ background: '#333' }}>
         <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Typography variant="title" color="inherit">CatBot</Typography>
         {!this.state.loggedIn ?
-          <Button color="inherit" onClick={() => this.openLoginModal()}>Login</Button> :
+          <Button color="inherit" onClick={() => this.openLoginModal()}>Sign In</Button> :
           <span>
             <Button color="inherit" onClick={() => api.logout()}>Sign Out</Button>
             <IconButton><AccountCircle style={{ color: 'white' }} /></IconButton>
